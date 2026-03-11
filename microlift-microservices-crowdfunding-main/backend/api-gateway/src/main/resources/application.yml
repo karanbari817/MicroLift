@@ -1,0 +1,61 @@
+server:
+  port: ${PORT:${SERVER_PORT:8080}}
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  codec:
+    max-in-memory-size: 50MB
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Access-Control-Allow-Methods, RETAIN_FIRST
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**, /api/users/**
+        - id: admin-route
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/admin/**
+        - id: campaign-service
+          uri: lb://campaign-service
+          predicates:
+            - Path=/api/campaigns/**
+        - id: donation-service
+          uri: lb://donation-service
+          predicates:
+            - Path=/api/donations/**, /api/payouts/**
+        - id: media-service
+          uri: lb://media-service
+          predicates:
+            - Path=/api/media/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+
+# Spring Servlet Multipart Config (Though Gateway is reactive, keeping for safety if needed by dependency)
+# Ideally Gateway doesn't need this, but to remove the error:
+# spring: (removed duplicate)
+#   servlet: ...

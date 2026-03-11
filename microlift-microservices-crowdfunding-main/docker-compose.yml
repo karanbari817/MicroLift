@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: microlift-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 54321
+      MYSQL_DATABASE: microlift_auth_db
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  discovery-server:
+    build: ./backend/discovery-server
+    container_name: microlift-discovery
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  api-gateway:
+    build: ./backend/api-gateway
+    container_name: microlift-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+  auth-service:
+    build: ./backend/auth-service
+    container_name: microlift-auth
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - discovery-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/microlift_auth_db?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=54321
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+  campaign-service:
+    build: ./backend/campaign-service
+    container_name: microlift-campaign
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+      - discovery-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/microlift_campaign_db?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=54321
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+  donation-service:
+    build: ./backend/donation-service
+    container_name: microlift-donation
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mysql
+      - discovery-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/microlift_donation_db?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=54321
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+  media-service:
+    build: ./backend/media-service
+    container_name: microlift-media
+    ports:
+      - "8084:8084"
+    depends_on:
+      - discovery-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    volumes:
+      - media-uploads:/app/microlift-uploads
+
+  frontend:
+    build: ./frontend
+    container_name: microlift-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+
+volumes:
+  mysql-data:
+  media-uploads:

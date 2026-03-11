@@ -1,0 +1,93 @@
+export const campaigns = [
+    {
+        id: 1,
+        title: "Help Rahul Pay His Engineering Fees",
+        description: "Rahul is a brilliant student from a farmer family. He needs help to pay his final year tuition fees. His father's crops failed this year.",
+        category: "Education",
+        raised: 45000,
+        goal: 80000,
+        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Pune, MH",
+        verified: true,
+        status: "Active",
+        endDate: "2024-12-31"
+    },
+    {
+        id: 6,
+        title: "Digital Classroom for Rural School",
+        description: "Help us equip a rural school in Bihar with computers and internet access to bridge the digital divide.",
+        category: "Education",
+        raised: 45000,
+        goal: 150000,
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Patna, BR",
+        verified: true,
+        status: "Active",
+        endDate: "2025-02-15"
+    },
+    {
+        id: 7,
+        title: "Emergency Cancer Treatment for Sunita",
+        description: "Sunita is a single mother battling breast cancer. She needs urgent chemotherapy and radiation.",
+        category: "Medical",
+        raised: 125000,
+        goal: 500000,
+        image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Bangalore, KA",
+        verified: true,
+        status: "Active",
+        endDate: "2025-03-01"
+    },
+    {
+        id: 2,
+        title: "Urgent: Heart Surgery for Little Anaya",
+        description: "5-year-old Anaya needs open heart surgery immediately. Her parents cannot afford the cost. Every rupee counts.",
+        category: "Medical",
+        raised: 120000,
+        goal: 300000,
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Mumbai, MH",
+        verified: true,
+        status: "Active",
+        endDate: "2024-11-15"
+    },
+    {
+        id: 3,
+        title: "Support Priya's Medical Studies",
+        description: "Priya secured a merit seat in MBBS but needs funds for admission fees and books. She wants to be a doctor to serve her village.",
+        category: "Education",
+        raised: 15000,
+        goal: 50000,
+        image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Nagpur, MH",
+        verified: false,
+        status: "Pending",
+        endDate: "2025-01-20"
+    },
+    {
+        id: 4,
+        title: "Kidney Transplant for Ramesh",
+        description: "Ramesh has been on dialysis for 3 years. He finally found a donor but needs funds for the transplant surgery.",
+        category: "Medical",
+        raised: 550000,
+        goal: 800000,
+        image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Delhi, DL",
+        verified: true,
+        status: "Active",
+        endDate: "2024-10-10"
+    },
+    {
+        id: 5,
+        title: "School Fees for 50 Slum Children",
+        description: "Help us provide basic education and school supplies to 50 children living in the Dharavi slums.",
+        category: "Education",
+        raised: 20000,
+        goal: 100000,
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        location: "Mumbai, MH",
+        verified: true,
+        status: "Active",
+        endDate: "2024-12-01"
+    }
+];
