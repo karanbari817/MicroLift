@@ -649,8 +649,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@karanbari817](https://github.com/karanbari817)
-- LinkedIn: [karankothalkar](https://www.linkedin.com/in/karankothalkar)
+- GitHub: [@Karanbari817](https://github.com/karanbari817)
+- LinkedIn: [Karankothalkar](https://www.linkedin.com/in/karankothalkar)
 - Email: kothalkarakaran69@gmail.com
 
 ---
